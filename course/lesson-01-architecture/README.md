@@ -39,11 +39,20 @@ By the end of this lesson you will be able to:
 steady 1 Hz: 500 ms on, 500 ms off, forever, using a calibrated 1 MHz clock
 and a counted delay loop.
 
+`examples/heartbeat/heartbeat.s` — a second worked example, same toolbox as
+`blink.s` (no new concepts): two quick pulses then a pause, repeating.
+Reinforces composing several timed segments rather than one on/off pair.
+
 `exercises/ex1` — the same idea, but you derive your own delay constants to
 hit a different (faster) blink rate.
 
 `exercises/ex2` — a design problem: make two LEDs alternate correctly, with
 no gap and no overlap.
+
+`quiz.toml` — a short, self-graded concept check (open it in the IDE) once
+you've read both tutorials — see `diagrams/register-office.html` for an
+illustrated take on the register file first if you want the visual version
+before the quiz.
 
 There is no `handheld/` milestone this lesson — Lesson 01 is foundational.
 The Course Map's first milestone (`hal/leds.s`) begins in Lesson 02.
@@ -85,3 +94,5 @@ including `handheld/main.s` itself.
       program does not depend on the debugger staying attached
 - [ ] `exercises/ex1` and `exercises/ex2` each build, flash, and behave per
       their own success criteria (see `exercises/README.md`)
+- [ ] `quiz.toml` passed (retake as many times as you want — it's a concept
+      check, not a grade)

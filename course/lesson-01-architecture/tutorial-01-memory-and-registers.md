@@ -66,6 +66,9 @@ special-purpose; the rest are general-purpose scratch.
 | R3 | **CG** — Constant Generator | A hardware trick — reading R3 in certain addressing modes produces one of several common constants (0, 1, 2, 4, 8, −1) without needing an extra instruction word. You don't write assembly that references R3 directly; the assembler picks the encoding for you when you write a small immediate. The full encoding table is Lesson 04's job — for now, just know R3 is reserved and isn't a scratch register. |
 | R4–R15 | General purpose | Yours to use. This course's convention (`handheld/registers.md`) reserves R4–R11 for persistent state and R12–R15 for scratch/arguments once the project grows an ISR — not required for this lesson's single-loop program, but good to see coming. |
 
+**[▶ See it: The Register Office](diagrams/register-office.html)** — PC, SP, and SR
+as three workers with one job each (open in a browser; it animates).
+
 ## Why SP Must Be Set to `0x0400` First
 
 RAM spans `0x0200`–`0x03FF`. The stack grows **downward** — each `push` or

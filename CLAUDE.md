@@ -66,6 +66,8 @@ course/
     ├── README.md
     ├── tutorial-01-*.md
     ├── tutorial-02-*.md
+    ├── diagrams/               ← Optional illustrated/animated concept pages (standalone .html, open in a browser)
+    ├── quiz.toml               ← Optional self-graded concept-check quiz (see Exercise Format Policy, "Quiz" row)
     ├── examples/               ← Working demo (Makefile + *.s) — study AFTER exercises
     └── exercises/
         ├── README.md
@@ -253,6 +255,7 @@ Each lesson has **3 exercises**:
 | Ex1 | Behaviour spec, what to look up in SLAU144, success criteria | Pseudocode, register bit patterns, loop structure hints |
 | Ex2 | Problem statement, observable failure mode | What's broken, how to fix it, which register |
 | Ex3 | Behaviour spec, public function names + arg registers | Register assignments, algorithm outlines, subroutine templates |
+| Quiz | Multiple-choice on tutorial *concepts/reasoning*, answer key + explanation shown after each question, unlimited retakes, self-graded (no Claude conversation needed) | Questions about ex1–3 exercise or milestone *implementation* — a quiz tests whether the tutorial's reasoning landed, never leaks how to solve a graded exercise |
 
 **Grading rules:**
 - Grade against the spec, not a solution file
@@ -262,6 +265,7 @@ Each lesson has **3 exercises**:
 - Do not show the correct implementation — ever
 - When student is stuck: point to ONE specific line or ask ONE question. Never give the answer.
 - When student misreads the spec: hold the original interpretation. Do not agree with the misreading.
+- After grading, update the matching lesson/exercise entry in `progress/progress.json` (status, grade, date). If feedback calls out a genuine weak spot (not a cosmetic note), append it to that file's `concept_gaps` array — see `progress/README.md` for the schema.
 
 **Interaction rules:**
 - Do not introduce instructions not yet covered in the curriculum

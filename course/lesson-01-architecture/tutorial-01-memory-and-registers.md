@@ -53,6 +53,49 @@ on which region they're linked into.
   8 MHz and 16 MHz. You'll read from these addresses in the DCO calibration
   sequence below, but you never write to them.
 
+## Why the Two Large Gaps?
+
+Between the end of Info Flash (`0x10FF`) and the start of program Flash
+(`0xC000`) sits about 43.5 KB of address space — nearly three times this
+chip's entire usable Flash — that is neither RAM, nor Flash, nor a
+peripheral. It's simply unimplemented: no transistors exist there.
+
+TI defines one common memory map *shape* across the whole MSP430x2xx
+family, from parts with 1 KB of Flash up to ones with 56 KB. Peripherals
+and Info Flash always start at the same fixed low addresses regardless of
+chip size, and the interrupt vector table always ends at `0xFFFF` — the
+reset vector must live at the hardware-fixed `0xFFFE` so the CPU always
+knows where to fetch its first instruction after reset, no matter which
+family member it is. RAM and program Flash are the two regions that scale
+with chip size, and both are anchored to a *fixed* neighbor rather than to
+each other: RAM always starts right after peripherals (`0x0200`) and grows
+upward, while Flash is anchored to the fixed top address and grows
+downward — its start address is always `0x10000 − (Flash size)`. For this
+chip's 16 KB, that's `0x10000 − 0x4000 = 0xC000`, exactly matching the
+diagram. Whatever's left in between — after this chip's modest 512 B of
+RAM, before Info Flash's fixed `0x1000`; and after Info Flash, before this
+chip's Flash happens to start — is the gap. A family member with more RAM
+and 32 KB of Flash would shrink both gaps, since more of the space in
+between would actually be populated. Neither gap is a design choice
+specific to the G2553 — they're the arithmetic left over from keeping one
+stable address layout across a product family whose RAM and Flash sizes
+each vary by more than 50×.
+
+**Why you can't use that space, even carefully:** every address has to be
+*decoded* to some physical circuit — a Flash array, an SRAM array, a
+peripheral register — that claims it and responds. TI only fabricates as
+much Flash and RAM silicon as this exact part is specified to have; in the
+gap, there is no array of transistors wired to those addresses at all — not
+locked, not reserved, just physically absent. SLAU144 Ch. 3 (System Reset,
+Interrupts, and Operating Modes) documents what actually happens if code
+accesses an unmapped address — worth reading directly rather than guessing.
+The linker script for this chip (`msp430g2553.ld`, the one `make` passes to
+the linker) only defines memory regions for the ranges that actually exist,
+so `.text`/`.data` can never land in the gap by accident — and even a
+hand-written linker script claiming that space existed wouldn't conjure
+Flash cells into being. A linker script only *describes* what's on the
+chip; it doesn't create hardware.
+
 ## The Register File
 
 The MSP430 CPU has sixteen 16-bit registers, R0–R15. Four of them are

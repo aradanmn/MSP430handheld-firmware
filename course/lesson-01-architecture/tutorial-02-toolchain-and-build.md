@@ -90,8 +90,10 @@ address the hardware will actually look at.
 Here's what happens between "you press the button on the LaunchPad power
 strip" and "your code starts running":
 
-1. **Reset.** Power-on (or a watchdog timeout, or the RST/NMI pin) puts the
-   CPU into a defined reset state and clears PC.
+1. **Reset.** Power-on (or a watchdog timeout, or the RST/NMI pin — a
+   shared Reset / **N**on-**M**askable **I**nterrupt line) puts the CPU
+   into a defined reset state and clears PC (the **P**rogram **C**ounter,
+   R0 — see Tutorial 01's register table).
 2. **Hardware reads the reset vector.** The CPU reads the 16-bit value
    stored at address `0xFFFE` — the last entry of the `.vectors` table you
    linked in.
@@ -101,8 +103,9 @@ strip" and "your code starts running":
    hardware where to begin.
 4. **Execution begins at `_start`.** The CPU starts fetching and executing
    instructions from that address — which is why `_start` always begins
-   with SP init, watchdog hold, and DCO calibration: nothing else has run
-   yet, so nothing else can be assumed to be in a safe state.
+   with SP (**S**tack **P**ointer, R1) init, watchdog hold, and DCO
+   (**D**igitally **C**ontrolled **O**scillator) calibration: nothing else
+   has run yet, so nothing else can be assumed to be in a safe state.
 
 ## Worked Scenario: Edit → Build → Flash → Power Cycle
 

@@ -5,11 +5,15 @@
 Every `.s` file in this course is assembled and linked by a single
 command, `msp430-elf-gcc`, invoked through a `Makefile`. Even though your
 source files are hand-written assembly, not C, we still go through GCC
-rather than calling the assembler (`as`) and linker (`ld`) directly —
-GCC's `-x assembler-with-cpp` flag tells it "treat this input as assembly,
-but run the C preprocessor over it first." That's what makes `#include
-"../../common/msp430g2553-defs.s"` work: it's a preprocessor directive, not
-a GAS directive, and it's resolved before the assembler ever sees the file.
+(the **G**NU **C**ompiler **C**ollection) rather than calling the
+assembler (`as`) and linker (`ld`) directly — GCC's `-x
+assembler-with-cpp` flag tells it "treat this input as assembly, but run
+the C preprocessor over it first." That's what makes `#include
+"../../common/msp430g2553-defs.s"` work: it's a preprocessor directive,
+not a GAS (**G**NU **AS**sembler — the `as` bundled with GCC) directive,
+and it's resolved before the assembler ever sees the file. Both are
+defined alongside the rest of the toolchain terms in
+`course/common/glossary.md`.
 
 The other flags that matter, all defined once in
 `course/common/Makefile.template` and inherited by every lesson's

@@ -39,9 +39,12 @@ By the end of this lesson you will be able to:
 steady 1 Hz: 500 ms on, 500 ms off, forever, using a calibrated 1 MHz clock
 and a counted delay loop.
 
-`examples/heartbeat/heartbeat.s` — a second worked example, same toolbox as
-`blink.s` (no new concepts): two quick pulses then a pause, repeating.
-Reinforces composing several timed segments rather than one on/off pair.
+`examples/forgot_wdthold/forgot_wdthold.s` — a second worked example
+illustrating tutorial-01's "Worked Scenario: What Happens If You Forget
+WDTHOLD?" on real hardware instead of only in prose: identical to
+`blink.s` except the watchdog-hold instruction is deliberately missing.
+Flash it once to see LED1 flicker/dim instead of lighting solidly — the
+chip resetting itself before it ever settles — then move on.
 
 `exercises/ex1` — the same idea, but you derive your own delay constants to
 hit a different (faster) blink rate.

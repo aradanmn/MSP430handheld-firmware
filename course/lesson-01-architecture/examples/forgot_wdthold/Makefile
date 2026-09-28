@@ -1,5 +1,5 @@
 #==============================================================================
-# Makefile — Lesson 01 example: heartbeat
+# Makefile — Lesson 01 example: forgot_wdthold
 # Usage:
 #   make          → compile to .elf
 #   make flash    → compile + flash via USB
@@ -7,7 +7,7 @@
 #   make clean    → remove build artifacts
 #==============================================================================
 
-TARGET  = heartbeat
+TARGET  = forgot_wdthold
 MCU     = msp430g2553
 
 # --- Toolchain auto-detect ---

@@ -1,5 +1,5 @@
 [project]
-name    = "L01 Architecture & Toolchain — Example: Heartbeat"
+name    = "L01 Architecture & Toolchain — Example: Forgot WDTHOLD"
 mcu     = "msp430g2553"
 mode    = "external"
 

@@ -238,6 +238,21 @@ See `handheld/registers.md` for the full reference. Summary:
 
 **Rules:** R4–R11 are callee-saved (push/pop if borrowed). R12–R15 are caller-saved. Aligns with MSP430 GCC ABI.
 
+## Example Design Policy
+
+Each file under a lesson's `examples/` should illustrate one concrete,
+distinct concept the lesson's own tutorials (or diagrams/quiz) actually
+explain — not a variation, remix, or "same idea again" of another example
+already in that lesson. Before adding a second (or third) example to a
+lesson, name the specific tutorial section or concept it demonstrates that
+the existing example(s) don't already cover. A worked failure scenario a
+tutorial only describes in prose (e.g., "Worked Scenario: What Happens If
+You Forget WDTHOLD?" in Lesson 01) is a strong candidate for its own
+example — students should get to observe it on hardware, not just read
+about it. (Lesson 01's `examples/forgot_wdthold/` replaced an earlier
+`examples/heartbeat/` that failed this bar — same toolbox as `blink.s`,
+no distinct concept — see git history if useful precedent.)
+
 ## Exercise Format Policy
 
 Solution directories do not exist. Do not create them. Do not recreate them.
